@@ -9,9 +9,9 @@ client
 
 bin/pulsar-client produce my-topic --messages "hello-pulsar"
 
-向my-topic这个topic生产数据，内容为“hello-pulsar”，如果topic不存在，pulsar会自动创建
+向 my-topic 这个topic生产数据，内容为“hello-pulsar”，如果topic不存在，pulsar会自动创建
 
-消费
+## 消费
 
 bin/pulsar-client consume my-topic -s "first-subscription"
 
@@ -19,63 +19,63 @@ bin/pulsar-client consume my-topic -s "first-subscription"
 
 ​
 
-tenants
+## tenants
 查看所有tenants
 
 /pulsar-admin tenants list
 
-创建tenants
+### 创建tenants
 
 pulsar-admin tenants create my-tenant
 
-删除tenants
+### 删除tenants
 
 pulsar-admin tenants delete my-tenant
 
-broker
-查看存活的broker信息
+## broker
+### 查看存活的broker信息
 
 pulsar-admin brokers list use
 
-查看broke如上的namesapce
+### 查看broke如上的namesapce
 
 pulsar-admin brokers namespaces use --url broker1.use.org.com:8080
 
-查看可以动态更新的配置
+### 查看可以动态更新的配置
 
 pulsar-admin brokers list-dynamic-config
 
-查看已经动态更新过的配置
+### 查看已经动态更新过的配置
 
 pulsar-admin brokers get-all-dynamic-config
 
-动态更新配置
+## 动态更新配置
 
 示例：
 
 pulsar-admin brokers update-dynamic-config brokerShutdownTimeoutMs 100
 
-namespace
-查看tenant下的所有namespace
+## namespace
+### 查看tenant下的所有namespace
 
 pulsar-admin namespaces list test-tenant
 
-创建namespace
+### 创建namespace
 
 pulsar-admin namespaces create test-tenant/test-namespace
 
-查看namespace策略
+### 查看namespace策略
 
 pulsar-admin namespaces policies test-tenant/test-namespace
 
-删除namespace
+### 删除namespace
 
 pulsar-admin namespaces delete test-tenant/ns1
 
-permission
+### permission
 pulsar的权限控制是在namespace级别的，
 
-授权
+## 授权
 
 pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
@@ -83,7 +83,7 @@ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 --role admin10
 
-注意： 当broker.conf中的authorizationAllowWildcardsMatching 为true时，支持通配符匹配，例如，
+### 注意： 当broker.conf中的authorizationAllowWildcardsMatching 为true时，支持通配符匹配，例如，
 
 pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
@@ -91,28 +91,28 @@ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 --role 'my.role.*'
 
-获取授权信息
+### 获取授权信息
 
 pulsar-admin namespaces permissions test-tenant/ns1
 
-撤销授权
+## 撤销授权
 
 pulsar-admin namespaces revoke-permission test-tenant/ns1 \
 
 --role admin10
 
 persistent topics
-格式： persistent://tenant/namespace/topic
+## 格式： persistent://tenant/namespace/topic
 
-查看namespace下的topic信息
+## 查看namespace下的topic信息
 
 pulsar-admin persistent list my-tenant/my-namespace
 
-列举persistent topic
+### 列举persistent topic
 
 pulsar-admin topics list tenant/namespace
 
-给客户端添加针对于某个topic的role（许可）
+### 给客户端添加针对于某个topic的role（许可）
 
 pulsar-admin persistent grant-permission
 
@@ -120,13 +120,13 @@ pulsar-admin persistent grant-permission
 
 persistent://test-tenant/ns1/topic1
 
-获取许可信息
+### 获取许可信息
 
 pulsar-admin persistent permissions \
 
 persistent://test-tenant/ns1/tp1
 
-回滚许可
+## 回滚许可
 
 pulsar-admin persistent revoke-permission \
 
@@ -134,31 +134,31 @@ pulsar-admin persistent revoke-permission \
 
 persistent://test-tenant/ns1/tp1 \
 
-删除topic
+### 删除topic
 
 pulsar-admin persistent delete \
 
 persistent://test-tenant/ns1/tp1 \
 
-下线topic
+### 下线topic
 
 pulsar-admin persistent unload \
 
 persistent://test-tenant/ns1/tp1
 
-查看topic相关的统计信息
+### 查看topic相关的统计信息
 
 pulsar-admin persistent stats \
 
 persistent://test-tenant/ns1/tp1
 
-查看topic内部统计信息
+### 查看topic内部统计信息
 
 pulsar-admin persistent stats-internal \
 
 persistent://test-tenant/ns1/tp1
 
-peek 消息
+### peek 消息
 
 pulsar-admin persistent peek-messages \
 
@@ -166,7 +166,7 @@ pulsar-admin persistent peek-messages \
 
 persistent://test-tenant/ns1/tp1
 
-跳过消费部分消息
+### 跳过消费部分消息
 
 pulsar-admin persistent skip \
 
