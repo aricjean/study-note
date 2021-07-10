@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pulsar-app
+spec:
+  containers:
+  - name: pulsar
+    image: apachepulsar/pulsar
+    ports:
+      - containerPort: 8080
+        hostPort: 18080
+        protocol: TCP
+      - containerPort: 6650
+        hostPort: 16650
+        protocol: TCP
+    volumeMounts:
+      - name: data-volume
+        mountPath: /pulsar/data
+      - name: conf-volume
+        mountPath: /pulsar/conf
+    command: ['bin/pulsar']
+    args: ["standalone"]
+  - name: pulsar-dashboard
+    image: apachepulsar/pulsar-dashboard
+    ports:
+      - containerPort: 80
+        hostPort: 1080
+        protocol: TCP
+    env:
+    - name: SERVICE_URL
+      value: "http://0.0.0.0:8080" 
+  volumes:
+    - name: data-volume
+      hostPath:
+        path: /www/custom-service/my-pulsar-app/data
+        type: Directory
+    - name: conf-volume
+      hostPath:
+        path: /www/custom-service/my-pulsar-app/conf
+        type: Directory
+
