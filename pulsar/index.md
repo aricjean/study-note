@@ -38,6 +38,14 @@ podman exec -it myPulsar bash bin/pulsar-client produce my-topic --messages "hel
 
 ```
 
+### 获取 运行中podman container 内部文件的 方法
+比如此 container 运行的id可以使用 xyz 标识，其内部有 /pulsar/conf 文件夹，想把其 /pulsar/conf 文件夹复制到宿主机上当前目录里可以使用如下命令：
+```
+podman cp xyz:/pulsar/conf .
+```
+
+
+
 ### 结合 pod 
 ```
 # 需要注意，国内的服务器不能访问 k8s.gcr.io 
