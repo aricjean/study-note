@@ -1,0 +1,14 @@
+# 容器异常
+## ubuntu ufw
+ubuntu下 podman 转发端口 ufw 防火墙 不能通过端口（ 不兼容） 的临时处理方案
+方法1
+ifconfig
+执行后，可以找到一些 cni-popdman0 这种的interface。
+使用iptables对所有的相关cni都转发一下 例如：
+iptables -I FORWARD -p tcp ! -i cni-podman0 -o cni-podman0 -j ACCEPT
+这样，即使开启着 ufw。你的podman的端口也能通过外部访问了。
+不过不安全。这是全部转发的端口都允许了。所以只是临时方案。否则只能关闭ufw(不能接受)
+方法2
+编辑 /etc/default/ufw 修改 DEFAULT_FORWARD_POLICY 的值为 ACCEPT
+sudo ufw reload
+
